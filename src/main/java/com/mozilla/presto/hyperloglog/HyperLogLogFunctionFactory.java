@@ -17,24 +17,18 @@ package com.mozilla.presto.hyperloglog;
 import com.facebook.presto.metadata.FunctionFactory;
 import com.facebook.presto.metadata.FunctionListBuilder;
 import com.facebook.presto.metadata.SqlFunction;
-import com.facebook.presto.spi.type.TypeManager;
 
 import java.util.List;
 
 public class HyperLogLogFunctionFactory implements FunctionFactory
 {
-    private final TypeManager typeManager;
-
-    public HyperLogLogFunctionFactory(TypeManager typeManager)
-    {
-        this.typeManager = typeManager;
-    }
+    public HyperLogLogFunctionFactory() {}
 
     @Override
     public List<SqlFunction> listFunctions()
     {
-        return new FunctionListBuilder(typeManager)
-                .scalar(HyperLogLogScalarFunctions.class)
+        return new FunctionListBuilder()
+                .scalars(HyperLogLogScalarFunctions.class)
                 .aggregate(HyperLogLogAggregation.class)
                 .getFunctions();
     }
