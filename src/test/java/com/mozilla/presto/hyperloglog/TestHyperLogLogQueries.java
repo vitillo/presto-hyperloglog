@@ -17,6 +17,7 @@ package com.mozilla.presto.hyperloglog;
 import com.facebook.presto.Session;
 import com.facebook.presto.metadata.FunctionFactory;
 import com.facebook.presto.metadata.InMemoryNodeManager;
+import com.facebook.presto.metadata.SqlFunction;
 import com.facebook.presto.spi.type.Type;
 import com.facebook.presto.testing.LocalQueryRunner;
 import com.facebook.presto.tests.AbstractTestQueryFramework;
@@ -25,6 +26,9 @@ import com.facebook.presto.type.ParametricType;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import org.testng.annotations.Test;
+
+import java.util.List;
+
 import static com.facebook.presto.testing.TestingSession.testSessionBuilder;
 import static com.facebook.presto.tpch.TpchMetadata.TINY_SCHEMA_NAME;
 
@@ -70,7 +74,6 @@ public class TestHyperLogLogQueries
         localQueryRunner.createCatalog("tpch", new TpchConnectorFactory(nodeManager, 1), ImmutableMap.<String, String>of());
 
         HyperLogLogPlugin plugin = new HyperLogLogPlugin();
-        plugin.setTypeManager(localQueryRunner.getTypeManager());
         for (Type type : plugin.getServices(Type.class)) {
             localQueryRunner.getTypeManager().addType(type);
         }
@@ -78,7 +81,13 @@ public class TestHyperLogLogQueries
             localQueryRunner.getTypeManager().addParametricType(parametricType);
         }
 
-        localQueryRunner.getMetadata().getFunctionRegistry().addFunctions(Iterables.getOnlyElement(plugin.getServices(FunctionFactory.class)).listFunctions());
+        List<SqlFunction> hllFuns = Iterables.getOnlyElement(
+                plugin.getServices(FunctionFactory.class)).listFunctions();
+
+        localQueryRunner
+                .getMetadata()
+                .addFunctions(hllFuns);
+
         return localQueryRunner;
     }
 }
