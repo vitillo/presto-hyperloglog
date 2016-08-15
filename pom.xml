@@ -7,12 +7,10 @@
     <parent>
         <groupId>com.facebook.presto</groupId>
         <artifactId>presto-root</artifactId>
-        <version>0.143-SNAPSHOT</version>
+        <version>0.150-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.facebook.presto</groupId>
     <artifactId>presto-hyperloglog</artifactId>
-    <version>0.143-SNAPSHOT</version>
     <packaging>presto-plugin</packaging>
 
     <properties>
