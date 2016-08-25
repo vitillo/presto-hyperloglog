@@ -29,10 +29,10 @@ Finally add the plugin to `/presto/presto-main/etc/config.properties`.
 
 Deployment on AWS EMR
 ---------------------
-An uberjar can be built from IntelliJ IDEA.
+The uber jar is now built by maven.
 
 ```bash
 mkdir /usr/lib/presto/plugin/presto-hyperloglog
 cd /usr/lib/presto/plugin/presto-hyperloglog
-sudo wget https://github.com/vitillo/presto-hyperloglog/raw/master/classes/artifacts/presto_hyperloglog_jar/presto-hyperloglog.jar
+sudo wget https://github.com/vitillo/presto-hyperloglog/raw/master/target/presto-hyperloglog-$PRESTO_VERSION-jar-with-dependencies.jar
 ```
