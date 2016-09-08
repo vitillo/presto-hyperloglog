@@ -17,30 +17,18 @@ package com.mozilla.presto.hyperloglog;
 import com.facebook.presto.metadata.FunctionFactory;
 import com.facebook.presto.spi.Plugin;
 import com.facebook.presto.spi.type.Type;
-import com.facebook.presto.spi.type.TypeManager;
 import com.google.common.collect.ImmutableList;
 
-import javax.inject.Inject;
 import java.util.List;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class HyperLogLogPlugin
         implements Plugin
 {
-    private TypeManager typeManager;
-
-    @Inject
-    public void setTypeManager(TypeManager typeManager)
-    {
-        this.typeManager = checkNotNull(typeManager, "typeManager is null");
-    }
-
     @Override
     public <T> List<T> getServices(Class<T> type)
     {
         if (type == FunctionFactory.class) {
-            return ImmutableList.of(type.cast(new HyperLogLogFunctionFactory(typeManager)));
+            return ImmutableList.of(type.cast(new HyperLogLogFunctionFactory()));
         }
         else if (type == Type.class) {
             return ImmutableList.of(type.cast(HyperLogLogType.HYPER_LOG_LOG));

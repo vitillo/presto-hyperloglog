@@ -7,13 +7,11 @@
     <parent>
         <groupId>com.facebook.presto</groupId>
         <artifactId>presto-root</artifactId>
-        <version>0.143-SNAPSHOT</version>
+        <version>0.150</version>
     </parent>
 
-    <groupId>com.facebook.presto</groupId>
     <artifactId>presto-hyperloglog</artifactId>
-    <version>0.143-SNAPSHOT</version>
-    <packaging>presto-plugin</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <air.main.basedir>${project.basedir}</air.main.basedir>
@@ -105,5 +103,32 @@
             <url>http://jcenter.bintray.com</url>
         </repository>
     </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.mozilla.presto.hyperloglog.HyperLogLogPlugin</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
