@@ -14,8 +14,8 @@
 
 package com.mozilla.presto.hyperloglog;
 
-import com.facebook.presto.operator.aggregation.state.AccumulatorState;
-import com.facebook.presto.operator.aggregation.state.AccumulatorStateMetadata;
+import com.facebook.presto.spi.function.AccumulatorState;
+import com.facebook.presto.spi.function.AccumulatorStateMetadata;
 import com.twitter.algebird.DenseHLL;
 
 import javax.validation.constraints.NotNull;

@@ -14,25 +14,30 @@
 
 package com.mozilla.presto.hyperloglog;
 
-import com.facebook.presto.metadata.FunctionFactory;
 import com.facebook.presto.spi.Plugin;
 import com.facebook.presto.spi.type.Type;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 
-import java.util.List;
+import java.util.Set;
+
+import static com.mozilla.presto.hyperloglog.HyperLogLogType.HYPER_LOG_LOG;
 
 public class HyperLogLogPlugin
         implements Plugin
 {
     @Override
-    public <T> List<T> getServices(Class<T> type)
+    public Iterable<Type> getTypes()
     {
-        if (type == FunctionFactory.class) {
-            return ImmutableList.of(type.cast(new HyperLogLogFunctionFactory()));
-        }
-        else if (type == Type.class) {
-            return ImmutableList.of(type.cast(HyperLogLogType.HYPER_LOG_LOG));
-        }
-        return ImmutableList.of();
+        return ImmutableList.of(HYPER_LOG_LOG);
+    }
+
+    @Override
+    public Set<Class<?>> getFunctions()
+    {
+        return ImmutableSet.<Class<?>>builder()
+                .add(HyperLogLogScalarFunctions.class)
+                .add(HyperLogLogAggregation.class)
+                .build();
     }
 }
