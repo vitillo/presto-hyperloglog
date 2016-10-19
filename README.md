@@ -9,7 +9,7 @@ There are two types of functions, aggregation and scalar.
 `merge(<hll: HLL>)` -> HLL
 
 ### Scalar
-`create_hll(<element:VARCHAR>, <bits: BIGINT>)` -> HLL
+`hll_create(<element:VARCHAR>, <bits: BIGINT>)` -> HLL
 
 `cardinality(<hll: HLL>)` -> BIGINT
 
