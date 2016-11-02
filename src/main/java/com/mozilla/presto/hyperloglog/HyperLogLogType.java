@@ -19,10 +19,9 @@ import com.facebook.presto.spi.block.Block;
 import com.facebook.presto.spi.block.BlockBuilder;
 import com.facebook.presto.spi.type.AbstractVariableWidthType;
 import com.facebook.presto.spi.type.SqlVarbinary;
+import com.facebook.presto.spi.type.TypeSignature;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.airlift.slice.Slice;
-
-import static com.facebook.presto.type.TypeUtils.parameterizedTypeName;
 
 public class HyperLogLogType extends AbstractVariableWidthType
 {
@@ -32,7 +31,7 @@ public class HyperLogLogType extends AbstractVariableWidthType
     @JsonCreator
     public HyperLogLogType()
     {
-        super(parameterizedTypeName(HyperLogLogType.TYPE), Slice.class);
+        super(new TypeSignature(HyperLogLogType.TYPE), Slice.class);
     }
 
     @Override

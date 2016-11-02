@@ -14,9 +14,9 @@
 
 package com.mozilla.presto.hyperloglog;
 
+import com.facebook.presto.array.ObjectBigArray;
 import com.facebook.presto.operator.aggregation.state.AbstractGroupedAccumulatorState;
-import com.facebook.presto.operator.aggregation.state.AccumulatorStateFactory;
-import com.facebook.presto.util.array.ObjectBigArray;
+import com.facebook.presto.spi.function.AccumulatorStateFactory;
 import com.twitter.algebird.DenseHLL;
 
 import static com.google.common.base.Preconditions.checkNotNull;

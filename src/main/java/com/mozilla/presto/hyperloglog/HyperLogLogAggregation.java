@@ -14,14 +14,14 @@
 
 package com.mozilla.presto.hyperloglog;
 
-import com.facebook.presto.operator.aggregation.AggregationFunction;
-import com.facebook.presto.operator.aggregation.CombineFunction;
-import com.facebook.presto.operator.aggregation.InputFunction;
-import com.facebook.presto.operator.aggregation.OutputFunction;
-import com.facebook.presto.operator.aggregation.state.AccumulatorStateSerializer;
 import com.facebook.presto.operator.aggregation.state.StateCompiler;
 import com.facebook.presto.spi.block.BlockBuilder;
-import com.facebook.presto.type.SqlType;
+import com.facebook.presto.spi.function.AccumulatorStateSerializer;
+import com.facebook.presto.spi.function.AggregationFunction;
+import com.facebook.presto.spi.function.CombineFunction;
+import com.facebook.presto.spi.function.InputFunction;
+import com.facebook.presto.spi.function.OutputFunction;
+import com.facebook.presto.spi.function.SqlType;
 import com.twitter.algebird.DenseHLL;
 import com.twitter.algebird.HyperLogLog;
 import io.airlift.slice.Slice;
